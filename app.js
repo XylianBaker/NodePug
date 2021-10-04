@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+// http://localhost:3000
+
 // handles the unspecified or non-existent paths 🏗️
 app.use((req, res, next) => {
     console.log(`URL: ${req.url}`);
