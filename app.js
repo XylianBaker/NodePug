@@ -61,5 +61,6 @@ const loadData = (path) => {
         return false
     }
 }
-storeData(data, path);
-console.log(loadData('sampleData.json'));
+
+// storeData(data, path);
+// console.log(loadData('sampleData.json'));
