@@ -4,6 +4,10 @@ const port = 3000;
 
 // http://localhost:3000
 
+// Make a static route to use your
+// static files in client side
+app.use('/static', express.static('static'));
+
 // directs to the directory, where the templates are kept 🐶
 app.set('views', './views');
 app.set('view engine', 'pug');
