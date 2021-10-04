@@ -29,3 +29,37 @@ app.get('*', (req, res, next) => {
 app.listen(port, () => {
     console.log(`Server started at port ${port}`);
 });
+
+// Read 📖 and write 🖊️ files 📁
+
+var data = {}
+data.table = []
+for (i = 0; i < 26; i++) {
+    var obj = {
+        id: i,
+        square: i * i
+    }
+    data.table.push(obj)
+}
+
+const path = 'sampleData.json'
+const fs = require('fs');
+
+const storeData = (data, path) => {
+    try {
+        fs.writeFileSync(path, JSON.stringify(data))
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+const loadData = (path) => {
+    try {
+        return fs.readFileSync(path, 'utf8')
+    } catch (err) {
+        console.error(err)
+        return false
+    }
+}
+storeData(data, path);
+console.log(loadData('sampleData.json'));
