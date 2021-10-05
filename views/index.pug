@@ -14,5 +14,7 @@ html
          br
          button(type = "submit") Send my greetings
    -var ob = JSON.parse(json)
-   -for(var prop in ob)
-   p #{prop}: #{ob[prop]}
+
+   ul
+      for data in ob.table
+         li=data.say + ": " + data.to
