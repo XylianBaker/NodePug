@@ -15,6 +15,15 @@ html
          button(type = "submit") Send my greetings
    -var ob = JSON.parse(json)
 
-   ul
-      for data in ob.table
-         li=data.say + ": " + data.to
+   //- ul
+   //-    for data in ob.table
+   //-       li=data.say + ": " + data.to
+   table.table.table-striped
+      tr
+        th Say
+        th To
+
+   each data in ob.table
+        tr
+          td= data.say
+          td= data.to
