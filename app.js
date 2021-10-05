@@ -34,44 +34,14 @@ app.use((req, res, next) => {
     next();
 });
 
-// renders the pug file
-app.get('/', (req, res) => {
-    res.render('index');
-});
-
-// if index.hhtml is not found 🔥
-app.get('*', (req, res, next) => {
-    res.status(200).send('Sorry, requested page not found.');
-    next();
-});
-
 // prints the server status and its port in the console 🖥️
 app.listen(port, () => {
     console.log(`Server started at port ${port}`);
 });
 
 // Read 📖 and write 🖊️ files 📁
-
-var data = {}
-data.table = []
-for (i = 0; i < 26; i++) {
-    var obj = {
-        id: i,
-        square: i * i
-    }
-    data.table.push(obj)
-}
-
 const path = 'sampleData.json'
 const fs = require('fs');
-
-const storeData = (data, path) => {
-    try {
-        fs.writeFileSync(path, JSON.stringify(data))
-    } catch (err) {
-        console.error(err)
-    }
-}
 
 const loadData = (path) => {
     try {
@@ -81,6 +51,34 @@ const loadData = (path) => {
         return false
     }
 }
+
+const storeData = (data, path) => {
+    try {
+        // var obj = {
+        //     table: []
+        // };
+        var obj = JSON.parse(loadData(path));
+        obj.table.push(data);
+        var json = JSON.stringify(obj);
+        fs.writeFileSync(path, json);
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+// renders the pug file
+app.get('/', (req, res) => {
+    res.render('index', {
+        layout: 'layout',
+        json: loadData(path)
+    });
+});
+
+// if index.hhtml is not found 🔥
+app.get('*', (req, res, next) => {
+    res.status(200).send('Sorry, requested page not found.');
+    next();
+});
 
 app.post('/', function (req, res) {
     console.log(loadData(path));

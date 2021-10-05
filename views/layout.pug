@@ -1,0 +1,9 @@
+extends index.pug
+html
+ head
+  body
+   p !{json}
+   p !{json.result}
+   p ---
+    each val, key in json
+     p #{key}: #{val}
