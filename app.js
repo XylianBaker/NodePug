@@ -28,11 +28,6 @@ app.use(bodyParser.urlencoded({
 app.use(upload.array());
 app.use(express.static('public'));
 
-app.post('/', function (req, res) {
-    console.log(req.body);
-    res.send("recieved your request!");
-});
-
 // handles the unspecified or non-existent paths 🏗️
 app.use((req, res, next) => {
     console.log(`URL: ${req.url}`);
@@ -87,5 +82,8 @@ const loadData = (path) => {
     }
 }
 
-// storeData(data, path);
-// console.log(loadData('sampleData.json'));
+app.post('/', function (req, res) {
+    console.log(loadData(path));
+    storeData(req.body, path);
+    res.send("recieved your request!");
+});
