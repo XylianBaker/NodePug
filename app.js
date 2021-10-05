@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const upload = multer();
 
 // http://localhost:3000
 
@@ -9,14 +11,27 @@ var bodyParser = require('body-parser');
 // static files in client side
 app.use('/static', express.static('static'));
 
-//parse requests
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
 // directs to the directory, where the templates are kept 🐶
 app.set('views', './views');
 app.set('view engine', 'pug');
+
+// for parsing application/json
+app.use(bodyParser.json());
+
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+//form-urlencoded
+
+// for parsing multipart/form-data
+app.use(upload.array());
+app.use(express.static('public'));
+
+app.post('/', function (req, res) {
+    console.log(req.body);
+    res.send("recieved your request!");
+});
 
 // handles the unspecified or non-existent paths 🏗️
 app.use((req, res, next) => {
