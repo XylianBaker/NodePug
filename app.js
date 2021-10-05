@@ -74,7 +74,7 @@ app.get('/', (req, res) => {
     });
 });
 
-// if index.hhtml is not found 🔥
+// if index.html is not found 🔥
 app.get('*', (req, res, next) => {
     res.status(200).send('Sorry, requested page not found.');
     next();
