@@ -1,12 +1,18 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+var bodyParser = require('body-parser');
 
 // http://localhost:3000
 
 // Make a static route to use your
 // static files in client side
 app.use('/static', express.static('static'));
+
+//parse requests
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // directs to the directory, where the templates are kept 🐶
 app.set('views', './views');
